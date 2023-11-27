@@ -1,6 +1,6 @@
 # Rust Animation Library
 
-A very early work-in-progress. This will become a flexible and powerful Rust library for animating arbitrary values/data types using keyframes and timelines.
+A very early work-in-progress. This will hopefully become a flexible and powerful Rust library for animating arbitrary value types using keyframes on a timeline. 
 
 ## Features
 
@@ -40,24 +40,28 @@ track.add_keyframe(1.0, MyValueType { /* final state */ });
 timeline.add_track(track);
 ```
 
+Includes a macro for less boilerplate:
+
+```
+create_animation_track!(
+        track,
+        MyValueType, 
+        Stop,
+        [
+            (0.0, MyValueType::new(0.0,0.0)),
+            (2.0, MyValueType::new(64.0,64.0)),
+        ]
+    );
+
+timeline.add_track(track);
+```
+
 Update your animation somewhere in the application logic, such as a game update loop:
 
 ```
 // Inside your update loop
-let elapsed_time = get_elapsed_time();
-let animated_properties = timeline.update(elapsed_time);
+let elapsed_time = app.elapsed_frames() as f64 / 60.0;
+let positions = model.timeline.update(elapsed_time);
 
 // Apply the animated properties to your objects
-```
-
-Includes a macro for less boilerplate:
-
-```
-create_animation_track!(MyModel {
-    field: MyValueType {
-        from: (0.0, initial_state),
-        to: (1.0, final_state),
-        end_behavior: EndBehavior::Loop,
-    },
-});
 ```
