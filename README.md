@@ -50,7 +50,7 @@ let animated_properties = timeline.update(elapsed_time);
 // Apply the animated properties to your objects
 ```
 
-Leverage macros and animation targets for more advanced animations with less boilerplate:
+Includes a macro for less boilerplate:
 
 ```
 create_animation_track!(MyModel {
