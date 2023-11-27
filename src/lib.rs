@@ -11,3 +11,6 @@ pub use animation_track::AnimationTrack;
 
 mod animation_timeline;
 pub use animation_timeline::AnimationTimeline;
+
+mod end_behavior;
+pub use end_behavior::EndBehavior;
