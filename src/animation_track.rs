@@ -144,3 +144,17 @@ where
         }
     }
 }
+
+
+// MACRO???
+
+#[macro_export]
+macro_rules! create_animation_track {
+    ($track_var:ident, $type:ty, $end_beh:ident, [ $( ($time:expr, $value:expr) ),* $(,)? ] ) => {
+        let mut $track_var = AnimationTrack::<$type>::new();
+        $(
+            $track_var.add_keyframe($time, $value);
+        )*
+        $track_var.set_end_behavior(EndBehavior::$end_beh);
+    };
+}
